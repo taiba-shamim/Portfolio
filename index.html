@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiba Shamim - Bioinformatics Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #B4D2E7;
+            --secondary: #94C5CC;
+            --accent: #A1A6B4;
+            --light-bg: #F8F8F8;
+            --card-bg: #FFFFFF;
+            --text: #000100;
+            --text-light: #5A5A5A;
+            --border: #E0E0E0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--light-bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Section - FIXED */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            color: var(--text);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.1"><polygon points="1000,100 1000,0 0,100"/></svg>');
+            border-radius: 0 0 30px 30px;
+            pointer-events: none; /* ADDED: Prevents background from blocking clicks */
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-size: 3rem;
+            margin: 0 auto 25px;
+            position: relative; /* ADDED */
+            z-index: 2; /* ADDED */
+        }
+
+        .header-content {
+            position: relative; /* ADDED */
+            z-index: 10; /* ADDED */
+        }
+
+        .header-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: var(--text);
+            position: relative; /* ADDED */
+            z-index: 2; /* ADDED */
+        }
+
+        .header-content p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--text);
+            opacity: 0.9;
+            position: relative; /* ADDED */
+            z-index: 2; /* ADDED */
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative; /* ADDED */
+            z-index: 20; /* ADDED: Higher z-index to ensure links are clickable */
+        }
+
+        .contact-links a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative; /* ADDED */
+            z-index: 20; /* ADDED: Highest z-index */
+            cursor: pointer; /* ADDED: Shows hand cursor on hover */
+        }
+
+        .contact-links a:hover {
+            background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1));
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            font-size: 2.2rem;
+            color: var(--text);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* Summary Section */
+        .summary {
+            background: linear-gradient(to right, var(--card-bg), #f0f7ff);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .summary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Education Section */
+        .education-item {
+            background: linear-gradient(to right, var(--card-bg), #f0f7ff);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
+        .education-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .education-item h3 {
+            color: var(--text);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .education-item .date {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .education-item .grade {
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Projects Section */
+        .project-item {
+            background: linear-gradient(to right, var(--card-bg), #f0f7ff);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-item h3 {
+            color: var(--text);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-item p {
+            margin-bottom: 15px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            background: linear-gradient(to right, rgba(148, 197, 204, 0.1), rgba(148, 197, 204, 0.2));
+            border: 1px solid rgba(148, 197, 204, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: linear-gradient(to right, rgba(148, 197, 204, 0.2), rgba(148, 197, 204, 0.3));
+            transform: translateY(-2px);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-category {
+            background: linear-gradient(to right, var(--card-bg), #f0f7ff);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-category h3 {
+            color: var(--text);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-list {
+            list-style-type: none;
+        }
+
+        .skill-list li {
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        .skill-list li i {
+            color: var(--secondary);
+        }
+
+        /* Internship & Certification */
+        .experiences-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 25px;
+        }
+
+        .experience-item {
+            background: linear-gradient(to right, var(--card-bg), #f0f7ff);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--secondary), var(--accent));
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-item h3 {
+            color: var(--text);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .experience-item .date {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Language Section */
+        .languages {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .language-item {
+            background: linear-gradient(to right, var(--card-bg), #f0f7ff);
+            border-radius: 20px;
+            padding: 25px 30px;
+            text-align: center;
+            min-width: 180px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .language-item:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .language-item h3 {
+            color: var(--text);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .language-item p {
+            color: var(--text-light);
+        }
+
+        /* Awards Section */
+        .awards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 25px;
+        }
+
+        .award-item {
+            background: linear-gradient(to right, var(--card-bg), #f0f7ff);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .award-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+
+        .award-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .award-item h3 {
+            color: var(--text);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--text);
+            text-align: center;
+            padding: 40px 0;
+            border-radius: 30px 30px 0 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Floating elements for background */
+        .floating {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary), transparent);
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .floating:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+        }
+
+        .floating:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 10%;
+            background: radial-gradient(circle, var(--secondary), transparent);
+        }
+
+        .floating:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 10%;
+            left: 20%;
+            background: radial-gradient(circle, var(--accent), transparent);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-links a {
+                width: 250px;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .skills-container,
+            .experiences-container,
+            .awards-container {
+                grid-template-columns: 1fr;
+            }
+
+            .languages {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .language-item {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background floating elements -->
+    <div class="floating"></div>
+    <div class="floating"></div>
+    <div class="floating"></div>
+
+    <!-- Header Section -->
+<header>
+    <div class="container">
+        <div class="header-content">
+            <div class="profile-img">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <h1>Taiba Shamim</h1>
+            <p>Bioinformatics Student | NGS Data Analysis | Machine Learning</p>
+        </div>
+
+        <div class="contact-links">
+            <a href="mailto:taibashamim04@gmail.com" class="contact-item">
+                <i class="fas fa-envelope"></i> Email
+            </a>
+            <a href="https://www.linkedin.com/in/taiba-shamim-31b64922b" target="_blank" class="contact-item">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://github.com/taiba-shamim" target="_blank" class="contact-item">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="Taiba_Shamim_CV.pdf" download class="contact-item">
+                <i class="fas fa-download"></i> Download CV
+            </a>
+        </div>
+    </div>
+</header>
+
+
+    <!-- Career Summary Section -->
+    <section id="summary">
+        <div class="container">
+            <h2 class="section-title">Career Summary</h2>
+            <div class="summary">
+                <p>Second-year M.Sc. Bioinformatics student, with sharp commitment and adaptability, hands-on experience in NGS data Analysis (galaxy platform), GRN reconstruction, RNA-seq analysis (bulk-cell seq), Biomarker Discovery, protein structure prediction and Structural analysis of Proteins, Skilled in Python, R, NGS data analysis with practical exposure to homology modelling, molecular docking.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <h3>M.Sc. Bioinformatics</h3>
+                <p class="date"><i class="far fa-calendar-alt"></i> 2024 – 2026</p>
+                <p><i class="fas fa-university"></i> Jamia Millia Islamia, Delhi (Dept. Of Computer Science)</p>
+                <p class="grade"><i class="fas fa-star"></i> CGPA: 9.34/10 (1st YEAR)</p>
+            </div>
+            <div class="education-item">
+                <h3>Bachelor of Science (Honors) Biotechnology</h3>
+                <p class="date"><i class="far fa-calendar-alt"></i> 2021 - 2024</p>
+                <p><i class="fas fa-university"></i> Mahatma Jyotiba Phule Rohilkhand University, Bareilly</p>
+                <p class="grade"><i class="fas fa-star"></i> Percentage: 83.4%</p>
+            </div>
+            <div class="education-item">
+                <h3>Senior Secondary (10+2)</h3>
+                <p class="date"><i class="far fa-calendar-alt"></i> 2018 - 2020</p>
+                <p><i class="fas fa-university"></i> St. Mary's Convent Senior Secondary School, Amroha (CBSE)</p>
+                <p class="grade"><i class="fas fa-star"></i> Percentage: 86.6%</p>
+            </div>
+            <div class="education-item">
+                <h3>Secondary (10th)</h3>
+                <p class="date"><i class="far fa-calendar-alt"></i> 2017 - 2018</p>
+                <p><i class="fas fa-university"></i> St. Mary's Convent Senior Secondary School, Amroha (CBSE)</p>
+                <p class="grade"><i class="fas fa-star"></i> Percentage: 87%</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-item">
+                <h3><i class="fas fa-project-diagram"></i> Gene Regulatory Network Construction</h3>
+                <p>Constructed a Gene Regulatory Network (GRN) from publicly available GEO datasets using ARACNE as the key inference method. Applied Python-based libraries to process gene expression data and infer regulatory relationships. Performed Topological Analysis of the GRN, using Python. Utilized visualization tools-Cytoscape to represent the network structure.</p>
+            </div>
+            <div class="project-item">
+                <h3><i class="fas fa-dna"></i> Identification of Differentially Expressed Genes in Inflammatory Bowel Disease</h3>
+                <p>Analyzed the dataset GDS1615 related to Crohn's disease and ulcerative colitis to identify differentially expressed genes.</p>
+            </div>
+            <div class="project-item">
+                <h3><i class="fas fa-atom"></i> Protein Structure Prediction of POTE paralogs</h3>
+                <p>Homology modelling of POTE paralogs using Swiss-Model. Structural Analysis of Proteins – allosteric sites analysis (using python). Phylogenetic Tree construction using MEGA 12 of POTE paralogs.</p>
+            </div>
+            <div class="project-item">
+                <h3><i class="fas fa-chart-line"></i> NGS Data Analysis</h3>
+                <p>NGS Data Analysis of triple negative breast cancer and ovarian cancer- quality check, read mapping and assessment, Visualization. Variant Calling. RNA-Seq Analysis – discovery of novel potential gene biomarkers for the diagnosis, prognosis, and development of drug targets of Breast Cancer.</p>
+            </div>
+            <div class="project-item">
+                <h3><i class="fas fa-chart-bar"></i> Functional Annotation & KEGG Pathway Enrichment</h3>
+                <p>Functional Annotation, KEGG Pathway Enrichment – of DEGs Identified in Breast Cancer Dataset using R. Gene Ranking Using Machine Learning (R-based) Implemented ML models in R to rank top 10 DEGs using FPKM values, identifying biologically significant genes for expression analysis.</p>
+            </div>
+            <div class="project-item">
+                <h3><i class="fas fa-brain"></i> Ongoing Project: Machine Learning for Hepatocellular Carcinoma</h3>
+                <p>Developing a Machine Learning Model for Prognosis of Hepatocellular Carcinoma using RNA-Seq data.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Programming Languages</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-chevron-right"></i> Python</li>
+                        <li><i class="fas fa-chevron-right"></i> R</li>
+                        <li><i class="fas fa-chevron-right"></i> Java Script</li>
+                        <li><i class="fas fa-chevron-right"></i> PHP</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-dna"></i> Bioinformatics Tools & Databases</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-chevron-right"></i> NGS Data Analysis – Trimmomatic, BWA, Bowtie2, Samtools, GATK, multiQC, fastQC, Galaxy Platform, Cufflinks</li>
+                        <li><i class="fas fa-chevron-right"></i> BLAST, NCBI GEO, STRING, SRA, TCGA Cytoscape, SWISS-Model, PyMOL, Cell Designer, MCODE, UCSF Chimera, AutoDock, IGV, Galaxy Platform, DAVID</li>
+                        <li><i class="fas fa-chevron-right"></i> Protein Structure Prediction: Homology modelling using Swiss-Model</li>
+                        <li><i class="fas fa-chevron-right"></i> Molecular Docking: using AutoDock Vina, ChimeraX, PyMOL</li>
+                        <li><i class="fas fa-chevron-right"></i> Sequence alignment: BLAST, CLUSTAL-W</li>
+                        <li><i class="fas fa-chevron-right"></i> Pathway Modelling- Cell designer</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-flask"></i> Laboratory Techniques</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-chevron-right"></i> Gel Electrophoresis</li>
+                        <li><i class="fas fa-chevron-right"></i> PCR</li>
+                        <li><i class="fas fa-chevron-right"></i> SDS-PAGE</li>
+                        <li><i class="fas fa-chevron-right"></i> Centrifugation</li>
+                        <li><i class="fas fa-chevron-right"></i> Broth culture</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-desktop"></i> Other Skills</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-chevron-right"></i> MS Word, MS PowerPoint, MS Excel</li>
+                        <li><i class="fas fa-chevron-right"></i> My SQL</li>
+                        <li><i class="fas fa-chevron-right"></i> HTML</li>
+                        <li><i class="fas fa-chevron-right"></i> Linux</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Internship Section -->
+    <section id="internship">
+        <div class="container">
+            <h2 class="section-title">Internship</h2>
+            <div class="experiences-container">
+                <div class="experience-item">
+                    <h3>Jawaharlal Nehru University (School of Computational and Integrative Sciences)</h3>
+                    <p class="date"><i class="far fa-calendar-alt"></i> Summer Intern (June-August)</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Network Pharmacology, Data Mining, Literature Review. Worked on cervical cancer dataset.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Jamia Millia Islamia (Multidisciplinary Centre of Advance Research)</h3>
+                    <p class="date"><i class="far fa-calendar-alt"></i> Project Intern</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Structural Analysis of Proteins (Pymol, Python)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certification Section -->
+    <section id="certification">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="experiences-container">
+                <div class="experience-item">
+                    <h3>How to Plan and Write Systematic Review Paper</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Dr. Zakir Husain Library, Jamia Millia Islamia</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Molecular Docking workshop with hands-on session</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Research Boulevard Technologies (AutoDock vina and PyRx tools)</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Introduction to Bioinformatics and its Advancements</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Biocode</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Supervised Machine Learning with python</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Mindluster</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Webinars Attended</h3>
+                    <p>Application of next generation sequencing in molecular medicine</p>
+                    <p>Application of Thin Layer Chromatography in Pharmacology</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards">
+        <div class="container">
+            <h2 class="section-title">Awards</h2>
+            <div class="awards-container">
+                <div class="award-item">
+                    <h3>Academic Excellence Award</h3>
+                    <p><i class="fas fa-trophy"></i> B.Sc Biotechnology, MJPRU Bareilly</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Language Section -->
+    <section id="languages">
+        <div class="container">
+            <h2 class="section-title">Languages</h2>
+            <div class="languages">
+                <div class="language-item">
+                    <h3>English</h3>
+                    <p>Fluent</p>
+                </div>
+                <div class="language-item">
+                    <h3>Hindi</h3>
+                    <p>Fluent</p>
+                </div>
+                <div class="language-item">
+                    <h3>Urdu</h3>
+                    <p>Native</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Taiba Shamim. All rights reserved.</p>
+            <p>Contact: taibashamim04@gmail.com</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // Working CV download script
+        document.getElementById('download-cv').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Replace 'your-cv.pdf' with the actual path to your PDF file
+            const pdfUrl = 'Curriculum_Vitae.pdf';
+            
+            // Create a temporary link element
+            const link = document.createElement('a');
+            link.href = pdfUrl;
+            link.download = 'CV_taiba.pdf'; // The filename for download
+            
+            // Append to body, click, and remove
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Optional: Show success message
+            console.log('CV download initiated');
+        });
+    </script>
+</body>
+</html>
